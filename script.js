@@ -12,14 +12,15 @@ function getComputerChoice(numberOptions){
 let playerSelection;
 let computerSelection;
 function chooseWeapon(){
+  //assigns weapon for every round to player and computer
   playerSelection = prompt("Choose your weapon: rock, paper or scissors");
-  playerSelection = playerSelection.toUpperCase();
+  playerSelection = playerSelection.toUpperCase();//makes every combination to a default
   computerSelection = getComputerChoice(numberOptions);
-
 }
 
 
 function playRound(playerSelection, computerSelection){
+  //compares the weapons to decide who wins
   if (playerSelection === 'ROCK' && computerSelection === 'PAPER') return 1;
   if (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') return 2;
   if (playerSelection === 'PAPER' && computerSelection === 'ROCK') return 2;
@@ -29,7 +30,6 @@ function playRound(playerSelection, computerSelection){
   if (playerSelection === computerSelection) return 0;
 
 }
-//console.log(playRound(playerSelection, computerSelection));
 
 function game(){
   let playerScore = 0;
@@ -42,10 +42,9 @@ function game(){
     if (score == 2) playerScore++;
     if (score == 1) computerScore++;
     console.log(`Player: ${playerScore}.  Computer: ${computerScore}`);
+    //just to check if the weapons change
     console.log(`Computer weapon: ${computerSelection}`);
     console.log(`Player weapon: ${playerSelection}`);
-
-
   }
 
   if (playerScore === computerScore) console.log('Nobody wins');
