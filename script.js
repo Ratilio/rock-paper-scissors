@@ -11,23 +11,23 @@ function getComputerChoice(numberOptions){
 
 let playerSelection;
 let computerSelection;
-function chooseWeapon(){
+/*function chooseWeapon(){
   //assigns weapon for every round to player and computer
   playerSelection = prompt("Choose your weapon: rock, paper or scissors");
   playerSelection = playerSelection.toUpperCase();//makes every combination to a default
   computerSelection = getComputerChoice(numberOptions);
-}
+}*/
 
 
 function playRound(playerSelection, computerSelection){
   //compares the weapons to decide who wins
-  if (playerSelection === 'ROCK' && computerSelection === 'PAPER') return 1;
-  if (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') return 2;
-  if (playerSelection === 'PAPER' && computerSelection === 'ROCK') return 2;
-  if (playerSelection === 'PAPER' && computerSelection === 'SCISSORS') return 1;
-  if (playerSelection === 'SCISSORS' && computerSelection === 'ROCK') return 1;
-  if (playerSelection === 'SCISSORS' && computerSelection === 'PAPER') return 2;
-  if (playerSelection === computerSelection) return 0;
+  if (this.className == 'rock-button' && computerSelection === 'PAPER') return 1;
+  if (this.className == 'rock-button' && computerSelection === 'SCISSORS') return 2;
+  if (this.className == 'paper-button' && computerSelection === 'ROCK') return 2;
+  if (this.className == 'paper-button' && computerSelection === 'SCISSORS') return 1;
+  if (this.className == 'scissors-button' && computerSelection === 'ROCK') return 1;
+  if (this.className == 'scissors-button' && computerSelection === 'PAPER') return 2;
+  if (this.textContent === computerSelection) return 0;
 
 }
 
@@ -36,7 +36,7 @@ function game(){
   let computerScore = 0;
   let score = 0;
 
-  for (let index = 0; index < 5; index++) {
+  for (let index = 0; index < 1; index++) {
     chooseWeapon();
     score = playRound(playerSelection,computerSelection);
     if (score == 2) playerScore++;
@@ -51,4 +51,14 @@ function game(){
   if (playerScore < computerScore) console.log('Computer wins');
   if (playerScore > computerScore) console.log('Player wins');
 }
-game();
+
+
+
+const btn = document.querySelector('button');
+btn.addEventListener("click", clicking);
+
+function clicking(){
+  if (this.className == 'scissors-button') alert('scissors');
+  if (this.className == 'rock-button') alert('rock');
+  if (this.className == 'paper-button') alert('paper');
+}
