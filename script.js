@@ -1,34 +1,51 @@
 const numberOptions = 3;
-function getComputerChoice(numberOptions){
-  //assigns random value to computer, from the only three options
-  let randomNumber = Math.floor(Math.random() * numberOptions);//creates random number, only gives us 3 options (0,1,2)
-  //let computerWeapon;
 
-  if (randomNumber === 0) return 'ROCK';
-  if (randomNumber === 1) return 'PAPER';
-  if (randomNumber === 2) return 'SCISSORS';
-}
-
-let playerSelection;
+let playerSelection = '';
 let playerSelectionInt;
 let computerSelection;
-/*function chooseWeapon(){
-  //assigns weapon for every round to player and computer
-  playerSelection = prompt("Choose your weapon: rock, paper or scissors");
-  playerSelection = playerSelection.toUpperCase();//makes every combination to a default
-  computerSelection = getComputerChoice(numberOptions);
-}*/
+let computerSelectionInt;
 
+const buttons = document.querySelectorAll('.btn');
+
+
+/*function chooseWeaponInt(){*/
+  //assigns weapon for every round to player and computer
+  buttons.forEach((button) => {button.addEventListener('click', ()=>{
+    playerSelection = button.id;
+    if (playerSelection == 'rock') playerSelectionInt = 0;
+    if (playerSelection == 'paper') playerSelection = 1;
+    if (playerSelection == 'scissors') playerSelection = 2;
+    })
+  })
+/*}*/
+game();
+function chooseWeapon(){
+  if (this == 0) return 'rock';
+  if (this == 1) return 'paper';
+  if (this == 2) return 'scissors'
+}
+
+function getComputerChoiceInt(numberOptions){
+  //assigns random value to computer, from the only three options
+  let randomNumber = Math.floor(Math.random() * numberOptions);//creates random number, only gives us 3 options (0,1,2)
+  return randomNumber;
+}
+
+function getComputerChoice(getComputerChoiceInt){
+  if (computerSelectionInt == 0) return 'rock';
+  if (computerSelectionInt == 1) return 'paper';
+  if (computerSelectionInt == 2) return 'scissors';
+}
 
 function playRound(playerSelection, computerSelection){
   //compares the weapons to decide who wins
-  if (this.className == 'rock-button' && computerSelection === 'PAPER') return 1;
-  if (this.className == 'rock-button' && computerSelection === 'SCISSORS') return 2;
-  if (this.className == 'paper-button' && computerSelection === 'ROCK') return 2;
-  if (this.className == 'paper-button' && computerSelection === 'SCISSORS') return 1;
-  if (this.className == 'scissors-button' && computerSelection === 'ROCK') return 1;
-  if (this.className == 'scissors-button' && computerSelection === 'PAPER') return 2;
-  if (this.textContent === computerSelection) return 0;
+  if (playerSelectionInt == 0 && computerSelection === 1) return 1;
+  if (playerSelectionInt == 0 && computerSelection === 2) return 2;
+  if (playerSelectionInt == 1 && computerSelection === 0) return 2;
+  if (playerSelectionInt == 1 && computerSelection === 2) return 1;
+  if (playerSelectionInt == 2 && computerSelection === 0) return 1;
+  if (playerSelectionInt == 2 && computerSelection === 1) return 2;
+  if (playerSelectionInt == computerSelection) return 0;
 
 }
 
@@ -38,8 +55,11 @@ function game(){
   let score = 0;
 
   for (let index = 0; index < 1; index++) {
-    chooseWeapon();
-    score = playRound(playerSelection,computerSelection);
+    //playerSelectionInt = chooseWeaponInt();
+    playerSelection = chooseWeapon(playerSelectionInt);
+    computerSelectionInt = getComputerChoiceInt(numberOptions);
+    computerSelection = getComputerChoice(computerSelectionInt)
+    score = playRound(playerSelectionInt,computerSelection);
     if (score == 2) playerScore++;
     if (score == 1) computerScore++;
     console.log(`Player: ${playerScore}.  Computer: ${computerScore}`);
@@ -51,22 +71,4 @@ function game(){
   if (playerScore === computerScore) console.log('Nobody wins');
   if (playerScore < computerScore) console.log('Computer wins');
   if (playerScore > computerScore) console.log('Player wins');
-}
-
-
-
-const buttons = document.querySelectorAll('.btn');
-clicking();
-
-function clicking(){
-  buttons.forEach((button) => {button.addEventListener('click', ()=>{
-    playerSelection = button.id;
-    if (playerSelection == 'rock') playerSelectionInt = 0;
-    else if (playerSelection == 'paper') playerSelectionInt = 1;
-    else if (playerSelection == 'scissors') playerSelectionInt = 2;
-
-    alert(playerSelectionInt);
-  })})
-
-  
 }
