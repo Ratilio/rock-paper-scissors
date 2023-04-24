@@ -10,6 +10,7 @@ function getComputerChoice(numberOptions){
 }
 
 let playerSelection;
+let playerSelectionInt;
 let computerSelection;
 /*function chooseWeapon(){
   //assigns weapon for every round to player and computer
@@ -54,11 +55,18 @@ function game(){
 
 
 
-const btn = document.querySelector('button');
-btn.addEventListener("click", clicking);
+const buttons = document.querySelectorAll('.btn');
+clicking();
 
 function clicking(){
-  if (this.className == 'scissors-button') alert('scissors');
-  if (this.className == 'rock-button') alert('rock');
-  if (this.className == 'paper-button') alert('paper');
+  buttons.forEach((button) => {button.addEventListener('click', ()=>{
+    playerSelection = button.id;
+    if (playerSelection == 'rock') playerSelectionInt = 0;
+    else if (playerSelection == 'paper') playerSelectionInt = 1;
+    else if (playerSelection == 'scissors') playerSelectionInt = 2;
+
+    alert(playerSelectionInt);
+  })})
+
+  
 }
