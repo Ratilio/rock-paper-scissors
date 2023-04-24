@@ -10,6 +10,13 @@ let computerScore = 0;
 let score;
 
 const buttons = document.querySelectorAll('.btn');
+const globalScoreText = document.getElementById('global-score');
+const roundWinnerText = document.getElementById('round-winner');
+const playerChoiceText = document.getElementById('player-choice');
+const computerChoiceText = document.getElementById('computer-choice');
+const globalWinnerText = document.getElementById('global-winner');
+
+
 
 //assigns weapon for every round to player and computer
 buttons.forEach((button) => {button.addEventListener('click', ()=>{
@@ -20,7 +27,8 @@ buttons.forEach((button) => {button.addEventListener('click', ()=>{
 
   computerSelectionInt = getComputerChoiceInt(numberOptions);
   computerSelection = getComputerChoice(computerSelectionInt)
-  game();
+  if (playerScore < 5 || computerScore < 5) game();
+  else return;
   })
 })
 
@@ -47,23 +55,41 @@ function playRound(playerSelectionInt, computerSelectionInt){
 
 }
 
-function game(){
-  
+function anounceWinner(){
+  /*if (playerScore > computerScore) console.log('Player wins game');
+  else console.log('Computer wins game');
+  console.log(`Player: ${playerScore}.  Computer: ${computerScore}`);*/
+  if (playerScore > computerScore) globalWinnerText.textContent = 'player wins';
+  else globalWinnerText.textContent = 'computer wins';
+  globalScoreText.textContent = `Player: ${playerScore}.  Computer: ${computerScore}`;
+}
 
-  if (playerScore == 5 || computerScore == 5) return;
+function game(){
   score = playRound(playerSelectionInt,computerSelectionInt);
   if (score == 2) {
-    playerScore++
-    console.log('player wins')
+    playerScore++;
+    roundWinnerText.textContent = 'player wins';
   };
   if (score == 1) {
-    computerScore++
-    console.log('computer wins')
+    computerScore++;
+    roundWinnerText.textContent = 'computer wins';
   };
-  if (score == 0) console.log('tie');
+  if (score == 0) roundWinnerText.textContent = 'tie';
 
-  console.log(`Player: ${playerScore}.  Computer: ${computerScore}`);
-  //just to check if the weapons change
-  console.log(`Computer weapon: ${computerSelection}`);
-  console.log(`Player weapon: ${playerSelection}`);
+  if (playerScore < 5 && computerScore < 5) {
+    /*console.log(`Player: ${playerScore}.  Computer: ${computerScore}`);
+    //just to check if the weapons change
+    console.log(`Computer weapon: ${computerSelection}`);
+    console.log(`Player weapon: ${playerSelection}`);*/
+
+    globalScoreText.textContent = `Player: ${playerScore}.  Computer: ${computerScore}`;
+    computerChoiceText.textContent = `Computer weapon: ${computerSelection}`;
+    playerChoiceText.textContent = `Player weapon: ${playerSelection}`;
+
+  };
+  
+  if (playerScore == 5 || computerScore == 5) {
+    anounceWinner();
+  };
 }
+
