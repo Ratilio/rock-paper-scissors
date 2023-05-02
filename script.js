@@ -16,22 +16,6 @@ const playerChoiceText = document.getElementById('player-choice');
 const computerChoiceText = document.getElementById('computer-choice');
 const globalWinnerText = document.getElementById('global-winner');
 
-
-/*while (playerScore < 5 || computerScore < 5) {
-  //assigns weapon for every round to player and computer
-buttons.forEach((button) => {button.addEventListener('click', ()=>{
-  playerSelection = button.id;
-  if (playerSelection == 'rock') playerSelectionInt = 0;
-  if (playerSelection == 'paper') playerSelectionInt = 1;
-  if (playerSelection == 'scissors') playerSelectionInt = 2;
-
-  computerSelectionInt = getComputerChoiceInt(numberOptions);
-  computerSelection = getComputerChoice(computerSelectionInt)
-  })
-  game();
-})
-}*/
-
 //assigns weapon for every round to player and computer
 buttons.forEach((button) => {button.addEventListener('click', ()=>{
   playerSelection = button.id;
@@ -46,8 +30,7 @@ buttons.forEach((button) => {button.addEventListener('click', ()=>{
   game();
   if(playerScore == 5 || computerScore == 5) anounceWinner();
 })
-  
-  
+
 })
 
 
@@ -97,7 +80,5 @@ function game(){
   globalScoreText.textContent = `Player: ${playerScore}.  Computer: ${computerScore}`;
   computerChoiceText.textContent = `Computer weapon: ${computerSelection}`;
   playerChoiceText.textContent = `Player weapon: ${playerSelection}`;
-  
-  
 }
 
